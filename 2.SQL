@@ -23,14 +23,14 @@ VALUES
 ('PJ002', '2026-9-19 07:15:00', 40, 'P002', 'PT002'),
 ('PJ003', '2026-9-19 07:30:00', 45, 'P003', 'PT003');
 
--- READ: Menampilkan seluruh data tabel persimpangan
-SELECT * FROM persimpangan;
+-- SELECT: Menampilkan seluruh data petugas
+SELECT * FROM petugas;
 
--- UPDATE: Mengubah durasi lampu hijau berdasarkan ID
-UPDATE penyesuaian_durasi
-SET durasi_hijau_baru = 40
-WHERE id_penyesuaian = 'PJ001';
+-- UPDATE: Mengubah jabatan petugas PT002
+UPDATE petugas
+SET jabatan = 'Koordinator Lalu Lintas'
+WHERE id_petugas = 'PT002';
 
--- DELETE: Menghapus satu data penyesuaian berdasarkan ID
+-- DELETE: Menghapus data penyesuaian PJ002
 DELETE FROM penyesuaian_durasi
-WHERE id_penyesuaian = 'PJ003';
+WHERE id_penyesuaian = 'PJ002';
