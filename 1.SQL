@@ -1,4 +1,3 @@
-sql
 -- Menggunakan database proyek sdg_transport_db
 USE sdg_transport_db;[cite: 3]
 
