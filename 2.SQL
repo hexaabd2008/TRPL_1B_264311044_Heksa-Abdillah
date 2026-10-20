@@ -1,9 +1,36 @@
--- 2. Membuat Tabel Induk 2: kendaraan
-CREATE TABLE IF NOT EXISTS kendaraan (
-    id_kendaraan INT AUTO_INCREMENT PRIMARY KEY,
-    id_pengguna INT NOT NULL,
-    nama_kendaraan VARCHAR(100) NOT NULL,
-    tipe_emisi ENUM('Bensin', 'Listrik', 'Hibrida') NOT NULL,
-    nomor_plat VARCHAR(15) NOT NULL UNIQUE,
-    FOREIGN KEY (id_pengguna) REFERENCES pengguna(id) ON DELETE CASCADE
-);
+-- CREATE: Menambahkan minimal 3 data ke tabel persimpangan
+INSERT INTO persimpangan
+(id_persimpangan, nama_persimpangan, lokasi)
+VALUES
+('P001', 'Perempatan Serayu', 'Jl. Serayu'),
+('P002', 'Perempatan Sriti', 'Jl. Urip Sumoharjo dan JL. A.Yani'),
+('P003', 'Perempatan PGA', 'Jl. Serayu,Berdekatan dengan perempatan serayu');
+
+-- CREATE: Menambahkan minimal 3 data ke tabel petugas
+INSERT INTO petugas
+(id_petugas, nama_petugas, jabatan)
+VALUES
+('PT001', 'Keisya azalia', 'Administrator Sistem'),
+('PT002', 'Mamun affandi', 'Operator Lalu Lintas'),
+('PT003', 'Danish Hisyamuddin', 'Teknisi Perangkat');
+
+-- CREATE: Menambahkan minimal 3 data ke tabel penyesuaian_durasi
+INSERT INTO penyesuaian_durasi
+(id_penyesuaian, waktu_penyesuaian, durasi_hijau_baru,
+ id_persimpangan, id_petugas)
+VALUES
+('PJ001', '2026-9-19 07:00:00', 35, 'P001', 'PT001'),
+('PJ002', '2026-9-19 07:15:00', 40, 'P002', 'PT002'),
+('PJ003', '2026-9-19 07:30:00', 45, 'P003', 'PT003');
+
+-- READ: Menampilkan seluruh data tabel persimpangan
+SELECT * FROM persimpangan;
+
+-- UPDATE: Mengubah durasi lampu hijau berdasarkan ID
+UPDATE penyesuaian_durasi
+SET durasi_hijau_baru = 40
+WHERE id_penyesuaian = 'PJ001';
+
+-- DELETE: Menghapus satu data penyesuaian berdasarkan ID
+DELETE FROM penyesuaian_durasi
+WHERE id_penyesuaian = 'PJ003';
