@@ -1,12 +1,11 @@
--- 3. Membuat Tabel Transaksi / Anak: perjalanan
-CREATE TABLE IF NOT EXISTS perjalanan (
-    id_perjalanan INT AUTO_INCREMENT PRIMARY KEY,
-    id_pengguna INT NOT NULL,
-    id_kendaraan INT NOT NULL,
-    lokasi_awal VARCHAR(150) NOT NULL,
-    lokasi_tujuan VARCHAR(150) NOT NULL,
-    tarif DECIMAL(10, 2) NOT NULL,
-    status_perjalanan ENUM('berlangsung', 'selesai', 'dibatalkan') DEFAULT 'berlangsung',
-    FOREIGN KEY (id_pengguna) REFERENCES pengguna(id) ON DELETE CASCADE,
-    FOREIGN KEY (id_kendaraan) REFERENCES kendaraan(id_kendaraan) ON DELETE CASCADE
-);
+SELECT
+    p.nama_persimpangan,
+    COUNT(pd.id_penyesuaian) AS jumlah_penyesuaian,
+    AVG(pd.durasi_hijau_baru) AS rata_rata_durasi_hijau
+FROM penyesuaian_durasi AS pd
+JOIN persimpangan AS p
+    ON pd.id_persimpangan = p.id_persimpangan
+JOIN petugas AS pt
+    ON pd.id_petugas = pt.id_petugas
+WHERE pd.durasi_hijau_baru >= 30
+GROUP BY p.id_persimpangan;
